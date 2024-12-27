@@ -3,8 +3,8 @@ import { sendMailToVerifyRegisterService } from "./sendMailToVerifyRegisterServi
 import { Register } from "./registerSchema";
 import { db } from "../../../db/db";
 import bcrypt from "bcrypt";
-import { BCRYPT } from "../../../config/bcrypt";
-import { JWT } from "../../../config/jwt";
+import { BCRYPT } from "../../../bcrypt/bcrypt";
+import { JWT } from "../../../jwt/jwt";
 import { DtoErr } from "../../../errors/DtoErr";
 
 export const registerService = async (register: Register) => {

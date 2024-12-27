@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Next, Req, Res } from "../types";
-import { JWT } from "../config/jwt";
+import { JWT } from "../jwt/jwt";
 import { UnauthorizedErr } from "../errors/UnauthorizedErr";
 import { Role } from "../db/schemas";
 
