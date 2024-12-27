@@ -1,4 +1,4 @@
-import "../services/dotenv";
+process.loadEnvFile();
 import bcrypt from "bcrypt";
 import { accounts, Role } from "./schemas";
 import { BCRYPT } from "../config/bcrypt";

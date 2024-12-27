@@ -7,7 +7,7 @@ export default defineConfig({
   dialect: "sqlite",
   // driver: "turso",
   dbCredentials: {
-    url: "file:./src/db/template.db",
+    url: "file:./src/db/netbutik.db",
     // url: process.env.DATABASE_URL!,
     // authToken: process.env.DATABASE_AUTH_TOKEN!,
   },

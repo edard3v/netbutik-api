@@ -23,6 +23,7 @@ export const loginService = async (login: Login) => {
       role: account.role,
       img: account.img,
       name: account.name,
+      email: account.email,
     },
     JWT.secret as string,
     { expiresIn: JWT.expiresIn }
@@ -36,4 +37,5 @@ export type TokenPayload = {
   role: Role;
   name: string;
   img: string;
+  email: string;
 };

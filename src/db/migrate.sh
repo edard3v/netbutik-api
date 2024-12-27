@@ -4,7 +4,7 @@
 rm -rf src/db/migrations
 
 # Elimina la db
-rm -rf src/db/template.db
+rm -rf src/db/netbutik.db
 
 # Genera una nueva migración
 npx drizzle-kit generate
