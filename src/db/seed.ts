@@ -1,7 +1,7 @@
 process.loadEnvFile();
 import bcrypt from "bcrypt";
 import { accounts, Role } from "./schemas";
-import { BCRYPT } from "../bcrypt/bcrypt";
+import { BCRYPT } from "../services/bcrypt/bcrypt";
 import { db } from "./db";
 
 const EDAR = {

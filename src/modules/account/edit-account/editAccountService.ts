@@ -3,7 +3,7 @@ import { accounts } from "../../../db/schemas";
 import { eq } from "drizzle-orm";
 import { UUID } from "crypto";
 
-import { BCRYPT } from "../../../bcrypt/bcrypt";
+import { BCRYPT } from "../../../services/bcrypt/bcrypt";
 import bcrypt from "bcrypt";
 import { EditAccount } from "./editAccountSchema";
 import { RecordNotFoundErr } from "../../../errors/RecordNotFoundErr";

@@ -3,7 +3,7 @@ import { db } from "../../../db/db";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import { JWT } from "../../../jwt/jwt";
+import { JWT } from "../../../services/jwt/jwt";
 import { UUID } from "crypto";
 import { Role } from "../../../db/schemas";
 import { LoginErr } from "../../../errors/LoginErr";

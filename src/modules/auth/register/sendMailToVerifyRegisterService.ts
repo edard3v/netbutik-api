@@ -1,4 +1,4 @@
-import { transporter } from "../../../services/transporter";
+import { transporter } from "../../../services/nodemailer/transporter";
 
 export const sendMailToVerifyRegisterService = async (
   to: string,

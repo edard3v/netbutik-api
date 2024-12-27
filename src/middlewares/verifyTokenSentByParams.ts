@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Middleware } from "../types";
-import { JWT } from "../jwt/jwt";
+import { JWT } from "../services/jwt/jwt";
 import { UnauthorizedErr } from "../errors/UnauthorizedErr";
 
 export const verifyTokenSentByParams: Middleware = (req, res, next) => {
