@@ -2,16 +2,15 @@ import jwt from "jsonwebtoken";
 import { sendMailToVerifyRegisterService } from "./sendMailToVerifyRegisterService";
 import { Register } from "./registerSchema";
 import { db } from "../../../db/db";
-import bcrypt from "bcrypt";
-import { BCRYPT } from "../../../services/bcrypt/bcrypt";
 import { JWT } from "../../../services/jwt/jwt";
 import { DtoErr } from "../../../errors/DtoErr";
+import { Bcrypt } from "../../../services/bcrypt/bcrypt";
 
 export const registerService = async (register: Register) => {
   await checkEmail(register.email);
 
   const newRegister = { ...register };
-  const passHashed = await bcrypt.hash(newRegister.password, BCRYPT.salt);
+  const passHashed = Bcrypt.hash(newRegister.password);
   newRegister.password = passHashed;
 
   const token = jwt.sign(newRegister, JWT.secret as string, {

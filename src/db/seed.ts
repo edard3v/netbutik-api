@@ -1,8 +1,7 @@
 process.loadEnvFile();
-import bcrypt from "bcrypt";
 import { accounts, Role } from "./schemas";
-import { BCRYPT } from "../services/bcrypt/bcrypt";
 import { db } from "./db";
+import { Bcrypt } from "../services/bcrypt/bcrypt";
 
 const EDAR = {
   id: crypto.randomUUID(),
@@ -24,9 +23,9 @@ const MYKE = {
 };
 
 const seed = async () => {
-  EDAR.password = await bcrypt.hash(EDAR.password, BCRYPT.salt);
-  LORE.password = await bcrypt.hash(LORE.password, BCRYPT.salt);
-  MYKE.password = await bcrypt.hash(MYKE.password, BCRYPT.salt);
+  EDAR.password = Bcrypt.hash(EDAR.password);
+  LORE.password = Bcrypt.hash(LORE.password);
+  MYKE.password = Bcrypt.hash(MYKE.password);
 
   await db.delete(accounts).execute();
   await db.insert(accounts).values([EDAR, LORE, MYKE]);

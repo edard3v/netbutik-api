@@ -2,11 +2,9 @@ import { db } from "../../../db/db";
 import { accounts } from "../../../db/schemas";
 import { eq } from "drizzle-orm";
 import { UUID } from "crypto";
-
-import { BCRYPT } from "../../../services/bcrypt/bcrypt";
-import bcrypt from "bcrypt";
 import { EditAccount } from "./editAccountSchema";
 import { RecordNotFoundErr } from "../../../errors/RecordNotFoundErr";
+import { Bcrypt } from "../../../services/bcrypt/bcrypt";
 
 export const editAccountService = async (
   accountId: UUID,
@@ -16,7 +14,7 @@ export const editAccountService = async (
   const isImgStringEmpty = newColums.img === "";
 
   if (newColums.password) {
-    newColums.password = await bcrypt.hash(newColums.password, BCRYPT.salt);
+    newColums.password = Bcrypt.hash(newColums.password);
   }
 
   const result = await db
