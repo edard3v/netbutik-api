@@ -1,18 +1,15 @@
-import jwt from "jsonwebtoken";
 import { Middleware } from "../types";
-import { JWT } from "../services/jwt/jwt";
 import { UnauthorizedErr } from "../errors/UnauthorizedErr";
+import { Jwt } from "../services/jwt/jwt";
 
 export const verifyTokenSentByParams: Middleware = (req, res, next) => {
   try {
     const token = req.params.token;
     if (!token) throw new UnauthorizedErr();
 
-    jwt.verify(token, JWT.secret as string, (err, tokenPayload) => {
-      if (err) throw new UnauthorizedErr(401);
-      res.locals = { ...res.locals, tokenPayload };
-      next();
-    });
+    const decoded = Jwt.verify(token);
+    res.locals = { ...res.locals, tokenPayload: decoded };
+    next();
   } catch (error) {
     next(error);
   }

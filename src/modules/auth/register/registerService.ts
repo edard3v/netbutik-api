@@ -1,10 +1,9 @@
-import jwt from "jsonwebtoken";
 import { sendMailToVerifyRegisterService } from "./sendMailToVerifyRegisterService";
 import { Register } from "./registerSchema";
 import { db } from "../../../db/db";
-import { JWT } from "../../../services/jwt/jwt";
 import { DtoErr } from "../../../errors/DtoErr";
 import { Bcrypt } from "../../../services/bcrypt/bcrypt";
+import { Jwt } from "../../../services/jwt/jwt";
 
 export const registerService = async (register: Register) => {
   await checkEmail(register.email);
@@ -13,8 +12,8 @@ export const registerService = async (register: Register) => {
   const passHashed = Bcrypt.hash(newRegister.password);
   newRegister.password = passHashed;
 
-  const token = jwt.sign(newRegister, JWT.secret as string, {
-    expiresIn: JWT.expiresInSignup,
+  const token = Jwt.sign(newRegister, {
+    expiresIn: Jwt.expiresInRegister,
   });
 
   const link = `${process.env.API_BASE_URL}/auth/verify-register/${token}`;

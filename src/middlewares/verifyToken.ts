@@ -1,8 +1,8 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
 import { Next, Req, Res } from "../types";
-import { JWT } from "../services/jwt/jwt";
 import { UnauthorizedErr } from "../errors/UnauthorizedErr";
 import { Role } from "../db/schemas";
+import { Jwt } from "../services/jwt/jwt";
+import { JwtPayload } from "jsonwebtoken";
 
 export const verifyToken = (role?: Role) => {
   return (req: Req, res: Res, next: Next) => {
@@ -10,15 +10,13 @@ export const verifyToken = (role?: Role) => {
     if (!token) throw new UnauthorizedErr();
 
     try {
-      jwt.verify(token, JWT.secret as string, (err, decoded) => {
-        if (err) throw new UnauthorizedErr(401);
+      const decoded = Jwt.verify(token) as JwtPayload;
 
-        const tokenPayload = decoded as JwtPayload;
-        if (role && tokenPayload?.role !== role) throw new UnauthorizedErr(403);
+      if (role && decoded?.role !== role) throw new UnauthorizedErr(403);
 
-        res.locals = { ...res.locals, tokenPayload };
-        next();
-      });
+      res.locals = { ...res.locals, tokenPayload: decoded };
+
+      next();
     } catch (error) {
       next(error);
     }

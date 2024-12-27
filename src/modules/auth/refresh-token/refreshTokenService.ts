@@ -1,16 +1,10 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
-import { JWT } from "../../../services/jwt/jwt";
+import { JwtPayload } from "jsonwebtoken";
+import { Jwt } from "../../../services/jwt/jwt";
 
 export const refreshTokenService = (token: string) => {
-  const tokenPayload = jwt.decode(token) as JwtPayload;
+  const { iat, exp, ...rest } = Jwt.decode(token) as JwtPayload;
 
-  const newPayload = { ...tokenPayload };
-  if (newPayload.iat) delete newPayload.iat;
-  if (newPayload.exp) delete newPayload.exp;
-
-  const newToken = jwt.sign(newPayload, JWT.secret as string, {
-    expiresIn: JWT.expiresIn,
-  });
+  const newToken = Jwt.sign({ ...rest });
 
   return newToken;
 };
