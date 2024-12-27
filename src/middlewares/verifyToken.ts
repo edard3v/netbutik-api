@@ -6,7 +6,9 @@ import { JwtPayload } from "jsonwebtoken";
 
 export const verifyToken = (role?: Role) => {
   return (req: Req, res: Res, next: Next) => {
-    const token = req.headers.authorization;
+    const bearerToken = req.headers.authorization;
+    const token = bearerToken?.split(" ").at(1);
+
     if (!token) throw new UnauthorizedErr();
 
     try {

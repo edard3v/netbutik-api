@@ -3,8 +3,11 @@ import { refreshLoginService } from "./refreshLoginService";
 
 export const refreshLoginController: Controller = async (req, res, next) => {
   try {
-    const token = refreshLoginService(req.headers.authorization as string);
-    res.status(201).json({ token });
+    const bearerToken = req.headers.authorization;
+    const token = bearerToken?.split(" ").at(1);
+
+    const newToken = refreshLoginService(token as string);
+    res.status(201).json({ token: newToken });
   } catch (error) {
     next(error);
   }
