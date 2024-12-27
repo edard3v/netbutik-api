@@ -16,7 +16,7 @@ export const registerService = async (register: Register) => {
     expiresIn: Jwt.expiresInRegister,
   });
 
-  const link = `${process.env.API_BASE_URL}/auth/verify-register/${token}`;
+  const link = `${process.env.API_BASE_URL}/auth/finish-register/${token}`;
   await sendMailToVerifyRegisterService(newRegister.email, link);
 };
 

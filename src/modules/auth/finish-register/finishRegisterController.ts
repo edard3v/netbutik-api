@@ -1,11 +1,11 @@
 import { Controller } from "../../../types";
 import { Register } from "../register/registerSchema";
-import { verifyRegisterService } from "./verifyRegisterService";
+import { finishRegisterService } from "./finishRegisterService";
 
-export const verifyRegisterController: Controller = async (_req, res, next) => {
+export const finishRegisterController: Controller = async (_req, res, next) => {
   try {
     const register = res.locals?.tokenPayload as Register;
-    await verifyRegisterService(register);
+    await finishRegisterService(register);
     res.status(201).send(page);
   } catch (error) {
     next(error);
