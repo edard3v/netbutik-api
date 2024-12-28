@@ -70,10 +70,10 @@ export const suppliers = sqliteTable("suppliers", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
-  email: text("email").unique().notNull(),
+  email: text("email").notNull(),
   tel: integer("tel").notNull(),
   country: integer("country").notNull(),
-  img: text("img").notNull(),
+  img: text("img"),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
 });

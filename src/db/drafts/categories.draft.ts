@@ -1,5 +1,3 @@
-process.loadEnvFile();
-
 export const CATEGORIES = [
   {
     id: "c0000000-1111-2222-3333-44444444444",
