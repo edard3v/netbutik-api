@@ -11,7 +11,9 @@ export const accounts = sqliteTable("accounts", {
   id: text("id", { length: 36 })
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  role: text("role", { enum: [Role.admin, Role.client] }).default(Role.client),
+  role: text("role", { enum: [Role.admin, Role.client, Role.seller] }).default(
+    Role.client
+  ),
   email: text("email").unique().notNull(),
   password: text("password").notNull(),
   name: text("name"),
