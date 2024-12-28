@@ -7,6 +7,7 @@ import { authRouter } from "../modules/auth/authRouter";
 import { accountsRouter } from "../modules/account/accountsRouter";
 import { categoriesRouter } from "../modules/categories/categoriesRouter";
 import { suppliersRouter } from "../modules/suppliers/suppliersRouter";
+import { productsRouter } from "../modules/products/productsRouter";
 
 // server
 
@@ -24,6 +25,7 @@ server.use("/auth", authRouter);
 server.use("/accounts", accountsRouter);
 server.use("/categories", categoriesRouter);
 server.use("/suppliers", suppliersRouter);
+server.use("/products", productsRouter);
 
 // handlers
 
