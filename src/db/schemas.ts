@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { numeric, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, numeric } from "drizzle-orm/sqlite-core";
 
 export enum Role {
   admin = "ADMIN",
@@ -19,8 +19,8 @@ export const accounts = sqliteTable("accounts", {
   name: text("name"),
   address: text("address"),
   img: text("img"),
-  tel: numeric("tel"),
-  country: numeric("country"),
+  tel: integer("tel"),
+  country: integer("country"),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
 });
@@ -29,8 +29,8 @@ export const bills = sqliteTable("bills", {
   id: text("id", { length: 36 })
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  tel: numeric("tel").notNull(),
-  country: numeric("country").notNull(),
+  tel: integer("tel").notNull(),
+  country: integer("country").notNull(),
   address: text("address"),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
@@ -50,7 +50,7 @@ export const products = sqliteTable("products", {
   sellingPrice: numeric("selling_price").notNull(),
   img: text("img").notNull(),
   video: text("video").notNull(),
-  isActive: numeric("is_active").notNull(),
+  isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
 });
@@ -71,8 +71,8 @@ export const suppliers = sqliteTable("suppliers", {
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
   email: text("email").unique().notNull(),
-  tel: numeric("tel").notNull(),
-  country: numeric("country").notNull(),
+  tel: integer("tel").notNull(),
+  country: integer("country").notNull(),
   img: text("img").notNull(),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
@@ -84,7 +84,7 @@ export const billsProducts = sqliteTable("bills_products", {
   id: text("id", { length: 36 })
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  count: numeric("count").notNull(),
+  count: integer("count").notNull(),
   price: numeric("price").notNull(),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
