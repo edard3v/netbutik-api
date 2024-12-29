@@ -1,10 +1,10 @@
-import { and, eq, gt, like } from "drizzle-orm";
+import { and, eq, gt, like, sql } from "drizzle-orm";
 import { db } from "../../../db/db";
 import { GetProducts } from "./getProductsSchema";
 import {
   categories,
   products,
-  productsCategories as middle,
+  productsCategories as middleTable,
 } from "../../../db/schemas";
 import { DtoErr } from "../../../errors/DtoErr";
 
@@ -15,15 +15,15 @@ export const getProductsService = async (params: GetProducts = {}) => {
     name ? like(products.name, `%${name}%`) : undefined,
     eq(products.isActive, true),
     gt(products.stock, 0),
-    categoryId ? eq(middle.categoryId, categoryId) : undefined,
+    categoryId ? eq(middleTable.categoryId, categoryId) : undefined,
   ].filter(Boolean);
 
   const totalRecords = (
     await db
       .select({ id: products.id })
       .from(products)
-      .leftJoin(middle, eq(middle.productId, products.id))
-      .leftJoin(categories, eq(categories.id, middle.categoryId))
+      .leftJoin(middleTable, eq(middleTable.productId, products.id))
+      .leftJoin(categories, eq(categories.id, middleTable.categoryId))
       .where(and(...where))
       .groupBy(products.id)
   ).length;
@@ -32,39 +32,22 @@ export const getProductsService = async (params: GetProducts = {}) => {
   if (page > totalPages) throw new DtoErr();
 
   const records = await db
-    .select()
+    .select({
+      products: products,
+      categories: sql`GROUP_CONCAT(${categories.name})`,
+    })
     .from(products)
-    .leftJoin(middle, eq(middle.productId, products.id))
-    .leftJoin(categories, eq(categories.id, middle.categoryId))
+    .leftJoin(middleTable, eq(middleTable.productId, products.id))
+    .leftJoin(categories, eq(categories.id, middleTable.categoryId))
     .where(and(...where))
     .limit(limit)
-    .offset((page - 1) * limit);
-
-  const recordsFormated = [];
-  for (let i = 0; i < records.length; i++) {
-    const record = records[i];
-    const { categories: category, products } = record;
-
-    const recordFound: any = recordsFormated.find(
-      (item) => item.id === products.id
-    );
-
-    console.log(recordsFormated);
-
-    if (recordFound) {
-      recordFound.categories.push(category);
-    } else {
-      recordsFormated.push({
-        ...products,
-        categories: [category].filter(Boolean),
-      });
-    }
-  }
+    .offset((page - 1) * limit)
+    .groupBy(products.id);
 
   return {
     limit,
     page,
     totalPages,
-    records: recordsFormated,
+    records,
   };
 };
