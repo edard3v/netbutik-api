@@ -1,11 +1,7 @@
-import { and, eq, gt, like, sql } from "drizzle-orm";
+import { and, eq, gt, like } from "drizzle-orm";
 import { db } from "../../../db/db";
 import { GetProducts } from "./getProductsSchema";
-import {
-  categories,
-  products,
-  productsCategories as middleTable,
-} from "../../../db/schemas";
+import { products, productsCategories } from "../../../db/schemas";
 import { DtoErr } from "../../../errors/DtoErr";
 
 export const getProductsService = async (params: GetProducts = {}) => {
@@ -15,14 +11,17 @@ export const getProductsService = async (params: GetProducts = {}) => {
     name ? like(products.name, `%${name}%`) : undefined,
     eq(products.isActive, true),
     gt(products.stock, 0),
-    categoryId ? eq(middleTable.categoryId, categoryId) : undefined,
+    categoryId ? eq(productsCategories.categoryId, categoryId) : undefined,
   ].filter(Boolean);
 
   const totalRecords = (
     await db
       .select({ id: products.id })
       .from(products)
-      .leftJoin(middleTable, eq(middleTable.productId, products.id))
+      .leftJoin(
+        productsCategories,
+        eq(productsCategories.productId, products.id)
+      )
       .where(and(...where))
       .groupBy(products.id)
   ).length;
@@ -32,12 +31,19 @@ export const getProductsService = async (params: GetProducts = {}) => {
 
   const records = await db
     .select({
-      products: products,
-      categories: sql`GROUP_CONCAT(${categories.name})`,
+      id: products.id,
+      name: products.name,
+      stock: products.stock,
+      buyingPrice: products.buyingPrice,
+      sellingPrice: products.sellingPrice,
+      img: products.img,
+      video: products.video,
+      isActive: products.isActive,
+      createdAt: products.createdAt,
+      updateAt: products.updateAt,
     })
     .from(products)
-    .leftJoin(middleTable, eq(middleTable.productId, products.id))
-    .leftJoin(categories, eq(categories.id, middleTable.categoryId))
+    .leftJoin(productsCategories, eq(productsCategories.productId, products.id))
     .where(and(...where))
     .limit(limit)
     .offset((page - 1) * limit)
