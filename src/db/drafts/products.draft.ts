@@ -1,6 +1,6 @@
 export const PRODUCTS = [
   {
-    id: "p0000000-1111-2222-3333-44444444444",
+    id: "p0000000-1111-2222-3333-444444444444",
     name: "Polo Shirt",
     stock: 50,
     buyingPrice: "40000", // COP
@@ -10,7 +10,7 @@ export const PRODUCTS = [
     isActive: true,
   },
   {
-    id: "p1000000-1111-2222-3333-44444444444",
+    id: "p1000000-1111-2222-3333-444444444444",
     name: "Jeans",
     stock: 30,
     buyingPrice: "60000", // COP
@@ -20,7 +20,7 @@ export const PRODUCTS = [
     isActive: true,
   },
   {
-    id: "p2000000-1111-2222-3333-44444444444",
+    id: "p2000000-1111-2222-3333-444444444444",
     name: "Sneakers",
     stock: 20,
     buyingPrice: "150000", // COP
@@ -30,7 +30,7 @@ export const PRODUCTS = [
     isActive: true,
   },
   {
-    id: "p3000000-1111-2222-3333-44444444444",
+    id: "p3000000-1111-2222-3333-444444444444",
     name: "Backpack",
     stock: 15,
     buyingPrice: "80000", // COP
@@ -40,7 +40,7 @@ export const PRODUCTS = [
     isActive: true,
   },
   {
-    id: "p4000000-1111-2222-3333-44444444444",
+    id: "p4000000-1111-2222-3333-444444444444",
     name: "Watch",
     stock: 25,
     buyingPrice: "200000", // COP

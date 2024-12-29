@@ -6,7 +6,7 @@ import { uuidSchema } from "../../../zod-schemas/uuidSchema";
 export const getProductsSchema = z
   .object({
     name: z.string().max(100),
-    category: uuidSchema,
+    categoryId: uuidSchema,
     page: pageSchema,
     limit: limitSchema,
     // isActive: z.coerce.number().int().min(0).max(1),
