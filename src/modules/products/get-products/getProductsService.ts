@@ -42,19 +42,23 @@ export const getProductsService = async (params: GetProducts = {}) => {
 
   const recordsFormated = [];
   for (let i = 0; i < records.length; i++) {
-    const tuple = records[i];
-    const { categories: category, products } = tuple;
+    const record = records[i];
+    const { categories: category, products } = record;
 
-    const recordFound = recordsFormated.find((item) => item.id === products.id);
+    const recordFound: any = recordsFormated.find(
+      (item) => item.id === products.id
+    );
 
-    if (recordFound?.id) {
+    console.log(recordsFormated);
+
+    if (recordFound) {
       recordFound.categories.push(category);
+    } else {
+      recordsFormated.push({
+        ...products,
+        categories: [category].filter(Boolean),
+      });
     }
-
-    recordsFormated.push({
-      ...products,
-      categories: [category].filter(Boolean),
-    });
   }
 
   return {
