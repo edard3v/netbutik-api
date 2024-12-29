@@ -45,7 +45,7 @@ export const products = sqliteTable("products", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").unique().notNull(),
-  stock: numeric("stock").notNull(),
+  stock: integer("stock").notNull(),
   buyingPrice: numeric("buying_price").notNull(),
   sellingPrice: numeric("selling_price").notNull(),
   img: text("img").notNull(),

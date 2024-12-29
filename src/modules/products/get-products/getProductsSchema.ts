@@ -9,6 +9,7 @@ export const getProductsSchema = z
     category: uuidSchema,
     page: pageSchema,
     limit: limitSchema,
+    // isActive: z.coerce.number().int().min(0).max(1),
   })
   .partial()
   .strict();
