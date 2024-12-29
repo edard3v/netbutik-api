@@ -23,7 +23,6 @@ export const getProductsService = async (params: GetProducts = {}) => {
       .select({ id: products.id })
       .from(products)
       .leftJoin(middleTable, eq(middleTable.productId, products.id))
-      .leftJoin(categories, eq(categories.id, middleTable.categoryId))
       .where(and(...where))
       .groupBy(products.id)
   ).length;
