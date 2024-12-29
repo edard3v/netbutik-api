@@ -5,7 +5,7 @@ import { products } from "../../../db/schemas";
 import { DtoErr } from "../../../errors/DtoErr";
 
 export const getProductsService = async (params: GetProducts = {}) => {
-  const { page = 1, limit = 20, name, categoryId } = params;
+  const { page = 1, limit = 20, name } = params;
 
   const where = [
     name ? like(products.name, `%${name}%`) : undefined,
@@ -14,17 +14,21 @@ export const getProductsService = async (params: GetProducts = {}) => {
   ].filter(Boolean);
 
   const totalRecords = (
-    await db.query.products.findMany({ where: and(...where) })
+    await db
+      .select({ id: products.id })
+      .from(products)
+      .where(and(...where))
   ).length;
 
   const totalPages = Math.ceil(totalRecords / limit) || 1;
   if (page > totalPages) throw new DtoErr();
 
-  const records = await db.query.products.findMany({
-    limit,
-    offset: (page - 1) * limit,
-    where: and(...where),
-  });
+  const records = await db
+    .select()
+    .from(products)
+    .where(and(...where))
+    .limit(limit)
+    .offset((page - 1) * limit);
 
   return {
     limit,
