@@ -2,7 +2,7 @@ import { and, eq, gt, like, sql } from "drizzle-orm";
 import { db } from "../../../db/db";
 import { GetProducts } from "./getProductsSchema";
 import { categories, products, productsCategories } from "../../../db/schemas";
-import { DtoErr } from "../../../errors/DtoErr";
+import { PageErr } from "../../../errors/PageErr";
 
 export const getProductsService = async (params: GetProducts = {}) => {
   const { page = 1, limit = 20, name, categoryId } = params;
@@ -18,10 +18,13 @@ export const getProductsService = async (params: GetProducts = {}) => {
     .from(products)
     .leftJoin(productsCategories, eq(products.id, productsCategories.productId))
     .where(and(...where))
-    .groupBy(products.id);
+    .groupBy(products.id)
+    .having(
+      categoryId ? eq(productsCategories.categoryId, categoryId) : undefined
+    );
 
   const totalPages = Math.ceil(totalRecords.length / limit) || 1;
-  if (page > totalPages) throw new DtoErr();
+  if (page > totalPages) throw new PageErr();
 
   const records = await db
     .select({
@@ -31,7 +34,7 @@ export const getProductsService = async (params: GetProducts = {}) => {
       price: products.sellingPrice,
       img: products.img,
       createdAt: products.createdAt,
-      categories: sql`
+      categories: sql<string>`
       CASE
         WHEN ${categories.id} IS NULL THEN '[]'
         ELSE JSON_GROUP_ARRAY(JSON_OBJECT('id', ${categories.id}, 'name', ${categories.name}))
@@ -41,12 +44,12 @@ export const getProductsService = async (params: GetProducts = {}) => {
     .leftJoin(productsCategories, eq(products.id, productsCategories.productId))
     .leftJoin(categories, eq(categories.id, productsCategories.categoryId))
     .where(and(...where))
-    .limit(limit)
-    .offset((page - 1) * limit)
     .groupBy(products.id)
     .having(
       categoryId ? eq(productsCategories.categoryId, categoryId) : undefined
-    );
+    )
+    .limit(limit)
+    .offset((page - 1) * limit);
 
   return {
     limit,
@@ -54,9 +57,7 @@ export const getProductsService = async (params: GetProducts = {}) => {
     totalPages,
     records: records.map((record) => ({
       ...record,
-      categories: JSON.parse(record.categories as string),
+      categories: JSON.parse(record.categories),
     })),
   };
 };
-
-// categoryId ? eq(productsCategories.categoryId, categoryId) : undefined,
