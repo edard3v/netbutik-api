@@ -31,7 +31,11 @@ export const getProductsService = async (params: GetProducts = {}) => {
       price: products.sellingPrice,
       img: products.img,
       createdAt: products.createdAt,
-      category: sql`GROUP_CONCAT(${categories.name})`,
+      categories: sql`
+      CASE
+        WHEN ${categories.id} IS NULL THEN '[]'
+        ELSE JSON_GROUP_ARRAY(JSON_OBJECT('id', ${categories.id}, 'name', ${categories.name}))
+      END`,
     })
     .from(products)
     .leftJoin(productsCategories, eq(products.id, productsCategories.productId))
@@ -41,16 +45,17 @@ export const getProductsService = async (params: GetProducts = {}) => {
     .offset((page - 1) * limit)
     .groupBy(products.id)
     .having(
-      categoryId
-        ? sql`SUM(CASE WHEN ${categories.id} = ${categoryId} THEN 1 ELSE 0 END) > 0`
-        : undefined
+      categoryId ? eq(productsCategories.categoryId, categoryId) : undefined
     );
 
   return {
     limit,
     page,
     totalPages,
-    records,
+    records: records.map((record) => ({
+      ...record,
+      categories: JSON.parse(record.categories as string),
+    })),
   };
 };
 
