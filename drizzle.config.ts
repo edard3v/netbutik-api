@@ -1,14 +1,10 @@
 process.loadEnvFile();
 import { defineConfig } from "drizzle-kit";
+import { CONFIG_DB } from "./src/db/db";
 
 export default defineConfig({
   schema: "./src/db/schemas.ts",
   out: "./src/db/migrations",
-  dialect: "sqlite",
-  // driver: "turso",
-  dbCredentials: {
-    url: "file:./src/db/netbutik.db",
-    // url: process.env.DATABASE_URL!,
-    // authToken: process.env.DATABASE_AUTH_TOKEN!,
-  },
+  dialect: "turso",
+  dbCredentials: CONFIG_DB,
 });
