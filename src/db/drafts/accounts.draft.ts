@@ -1,4 +1,4 @@
-process.loadEnvFile();
+process.loadEnvFile(".env");
 import { Bcrypt } from "../../services/bcrypt/bcrypt";
 import { Role } from "../schemas";
 

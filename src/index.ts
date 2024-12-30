@@ -1,4 +1,4 @@
-process.loadEnvFile();
+process.loadEnvFile(".env");
 import { PORT, SERVER_ON } from "./server/consts";
 import server from "./server/server";
 

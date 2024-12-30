@@ -1,4 +1,4 @@
-process.loadEnvFile();
+process.loadEnvFile(".env");
 import { defineConfig } from "drizzle-kit";
 import { CONFIG_DB } from "./src/db/db";
 
