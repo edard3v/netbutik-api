@@ -1,4 +1,5 @@
-process.loadEnvFile(".env");
+// process.loadEnvFile(".env");
+import "../services/dotenv/loadEnvFile";
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
 import * as schemas from "./schemas";

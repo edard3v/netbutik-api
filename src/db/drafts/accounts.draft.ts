@@ -1,4 +1,5 @@
-process.loadEnvFile(".env");
+// process.loadEnvFile(".env");
+import "./src/services/dotenv/loadEnvFile";
 import { Bcrypt } from "../../services/bcrypt/bcrypt";
 import { Role } from "../schemas";
 

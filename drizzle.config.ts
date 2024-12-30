@@ -1,4 +1,5 @@
-process.loadEnvFile(".env");
+// process.loadEnvFile(".env");
+import "./src/services/dotenv/loadEnvFile";
 import { defineConfig } from "drizzle-kit";
 import { CONFIG_DB } from "./src/db/db";
 
