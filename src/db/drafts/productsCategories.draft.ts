@@ -4,6 +4,10 @@ export const PRODUCTS_CATEGORIES = [
     categoryId: "c1000000-0000-0000-0000-000000000000", // Sueteres
   },
   {
+    productId: "p1000000-0000-0000-0000-000000000000", // Polo Shirt
+    categoryId: "c4000000-0000-0000-0000-000000000000", // Camisas
+  },
+  {
     productId: "p2000000-0000-0000-0000-000000000000", // Jeans
     categoryId: "c2000000-0000-0000-0000-000000000000", // Pantalones
   },
