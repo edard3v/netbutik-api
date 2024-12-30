@@ -1,18 +1,37 @@
 export const CATEGORIES = [
   {
-    id: "c0000000-1111-2222-3333-444444444444",
+    id: "c1000000-0000-0000-0000-000000000000",
     name: "sueteres",
     img: "https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg",
   },
   {
-    id: "c1000000-1111-2222-3333-444444444444",
+    id: "c2000000-0000-0000-0000-000000000000",
     name: "pantalones",
     img: "https://images.pexels.com/photos/1082528/pexels-photo-1082528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
-
   {
-    id: "c2000000-1111-2222-3333-444444444444",
+    id: "c3000000-0000-0000-0000-000000000000",
     name: "medias",
     img: "https://images.pexels.com/photos/1057005/pexels-photo-1057005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "c4000000-0000-0000-0000-000000000000",
+    name: "camisas",
+    img: "https://images.pexels.com/photos/264726/pexels-photo-264726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "c5000000-0000-0000-0000-000000000000",
+    name: "zapatos",
+    img: "https://images.pexels.com/photos/18799795/pexels-photo-18799795/free-photo-of-flores-jardin-zapatos-caracol.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "c6000000-0000-0000-0000-000000000000",
+    name: "bolsos",
+    img: "https://images.pexels.com/photos/3908800/pexels-photo-3908800.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "c7000000-0000-0000-0000-000000000000",
+    name: "reloj",
+    img: "https://images.pexels.com/photos/14675876/pexels-photo-14675876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];

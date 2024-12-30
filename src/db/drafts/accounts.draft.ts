@@ -4,20 +4,14 @@ import { Role } from "../schemas";
 
 export const ACCOUNTS = [
   {
-    id: "a0000000-1111-2222-3333-444444444444",
+    id: "a1000000-0000-0000-0000-000000000000",
     email: process.env.ADMIN_EMAIL!,
     password: Bcrypt.hash(process.env.ADMIN_PASSWORD!),
     role: Role.admin,
   },
   {
-    id: "a1000000-1111-2222-3333-444444444444",
+    id: "a2000000-0000-0000-0000-000000000000",
     email: "lore@gmail.com",
-    password: Bcrypt.hash("123456"),
-  },
-
-  {
-    id: "a2000000-1111-2222-3333-444444444444",
-    email: "myke@gmail.com",
     password: Bcrypt.hash("123456"),
   },
 ];
