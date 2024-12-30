@@ -34,4 +34,14 @@ export const CATEGORIES = [
     name: "reloj",
     img: "https://images.pexels.com/photos/14675876/pexels-photo-14675876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
+  {
+    id: "c8000000-0000-0000-0000-000000000000",
+    name: "gorra",
+    img: "https://images.pexels.com/photos/6342793/pexels-photo-6342793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "c9000000-0000-0000-0000-000000000000",
+    name: "chaqueta",
+    img: "https://images.pexels.com/photos/2765557/pexels-photo-2765557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
 ];
