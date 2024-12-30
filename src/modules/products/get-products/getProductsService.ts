@@ -1,7 +1,7 @@
-import { and, eq, gt, like } from "drizzle-orm";
+import { and, eq, gt, like, sql } from "drizzle-orm";
 import { db } from "../../../db/db";
 import { GetProducts } from "./getProductsSchema";
-import { products, productsCategories } from "../../../db/schemas";
+import { categories, products, productsCategories } from "../../../db/schemas";
 import { DtoErr } from "../../../errors/DtoErr";
 
 export const getProductsService = async (params: GetProducts = {}) => {
@@ -11,22 +11,16 @@ export const getProductsService = async (params: GetProducts = {}) => {
     name ? like(products.name, `%${name}%`) : undefined,
     eq(products.isActive, true),
     gt(products.stock, 0),
-    categoryId ? eq(productsCategories.categoryId, categoryId) : undefined,
   ].filter(Boolean);
 
-  const totalRecords = (
-    await db
-      .select({ id: products.id })
-      .from(products)
-      .leftJoin(
-        productsCategories,
-        eq(productsCategories.productId, products.id)
-      )
-      .where(and(...where))
-      .groupBy(products.id)
-  ).length;
+  const totalRecords = await db
+    .select({ id: products.id })
+    .from(products)
+    .leftJoin(productsCategories, eq(products.id, productsCategories.productId))
+    .where(and(...where))
+    .groupBy(products.id);
 
-  const totalPages = Math.ceil(totalRecords / limit) || 1;
+  const totalPages = Math.ceil(totalRecords.length / limit) || 1;
   if (page > totalPages) throw new DtoErr();
 
   const records = await db
@@ -34,20 +28,23 @@ export const getProductsService = async (params: GetProducts = {}) => {
       id: products.id,
       name: products.name,
       stock: products.stock,
-      buyingPrice: products.buyingPrice,
-      sellingPrice: products.sellingPrice,
+      price: products.sellingPrice,
       img: products.img,
-      video: products.video,
-      isActive: products.isActive,
       createdAt: products.createdAt,
-      updateAt: products.updateAt,
+      category: sql`GROUP_CONCAT(${categories.name})`,
     })
     .from(products)
-    .leftJoin(productsCategories, eq(productsCategories.productId, products.id))
+    .leftJoin(productsCategories, eq(products.id, productsCategories.productId))
+    .leftJoin(categories, eq(categories.id, productsCategories.categoryId))
     .where(and(...where))
     .limit(limit)
     .offset((page - 1) * limit)
-    .groupBy(products.id);
+    .groupBy(products.id)
+    .having(
+      categoryId
+        ? sql`SUM(CASE WHEN ${categories.id} = ${categoryId} THEN 1 ELSE 0 END) > 0`
+        : undefined
+    );
 
   return {
     limit,
@@ -56,3 +53,5 @@ export const getProductsService = async (params: GetProducts = {}) => {
     records,
   };
 };
+
+// categoryId ? eq(productsCategories.categoryId, categoryId) : undefined,

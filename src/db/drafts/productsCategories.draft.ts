@@ -19,4 +19,8 @@ export const PRODUCTS_CATEGORIES = [
     productId: "p1000000-1111-2222-3333-444444444444",
     categoryId: "c0000000-1111-2222-3333-444444444444", // sueter
   },
+  {
+    productId: "p4000000-1111-2222-3333-444444444444",
+    categoryId: "c2000000-1111-2222-3333-444444444444", // pantalones
+  },
 ];
