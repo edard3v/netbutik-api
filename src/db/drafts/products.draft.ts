@@ -8,6 +8,8 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/9301908/pexels-photo-9301908.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     video: "https://www.youtube.com/watch?v=C6vDS0vKxlg",
     isActive: true,
+    description:
+      "Camisa tipo polo clásica y cómoda, ideal para salidas casuales.",
   },
   {
     id: "p2000000-0000-0000-0000-000000000000",
@@ -18,6 +20,7 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/1082528/pexels-photo-1082528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     video: "https://www.youtube.com/watch?v=IMzRGVoSo38",
     isActive: true,
+    description: "Jeans resistentes y con estilo, ideales para el uso diario.",
   },
   {
     id: "p3000000-0000-0000-0000-000000000000",
@@ -28,6 +31,7 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/1032110/pexels-photo-1032110.jpeg",
     video: "https://www.youtube.com/watch?v=dDolHuIFiTI",
     isActive: true,
+    description: "Zapatillas modernas y cómodas para usar todo el día.",
   },
   {
     id: "p4000000-0000-0000-0000-000000000000",
@@ -38,6 +42,8 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/1986996/pexels-photo-1986996.jpeg",
     video: "https://www.youtube.com/watch?v=GHdHvPpRW04",
     isActive: true,
+    description:
+      "Mochila espaciosa y resistente, perfecta para viajes o escuela.",
   },
   {
     id: "p5000000-0000-0000-0000-000000000000",
@@ -48,6 +54,8 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
     video: "https://www.youtube.com/watch?v=diG519dFVNs",
     isActive: true,
+    description:
+      "Reloj elegante y funcional para complementar cualquier atuendo.",
   },
   {
     id: "p6000000-0000-0000-0000-000000000000",
@@ -58,6 +66,7 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/2460488/pexels-photo-2460488.jpeg",
     video: "https://www.youtube.com/watch?v=Gwfef2uAYcI",
     isActive: true,
+    description: "Chaqueta de cuero premium para un look audaz y elegante.",
   },
   {
     id: "p7000000-0000-0000-0000-000000000000",
@@ -68,5 +77,6 @@ export const PRODUCTS = [
     img: "https://images.pexels.com/photos/1822845/pexels-photo-1822845.jpeg",
     video: "https://www.youtube.com/watch?v=agvV_8glYz4",
     isActive: true,
+    description: "Camiseta sencilla y versátil, perfecta para el uso diario.",
   },
 ];

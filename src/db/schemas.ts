@@ -53,6 +53,7 @@ export const products = sqliteTable("products", {
   isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updateAt: text("updated_at").$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
+  description: text("description").notNull(),
 });
 
 export const categories = sqliteTable("categories", {

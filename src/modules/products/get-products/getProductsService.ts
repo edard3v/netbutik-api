@@ -33,6 +33,7 @@ export const getProductsService = async (params: GetProducts = {}) => {
       stock: products.stock,
       price: products.sellingPrice,
       img: products.img,
+      description: products.description,
       categories: sql<string>`
       CASE
       WHEN ${categories.id} IS NULL THEN '[]'
