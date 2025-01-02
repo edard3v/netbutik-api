@@ -24,11 +24,11 @@ export const PRODUCTS_CATEGORIES = [
     categoryId: "c7000000-0000-0000-0000-000000000000", // Reloj
   },
   {
-    productId: "p6000000-0000-0000-0000-000000000000", // Supreme
-    categoryId: "c8000000-0000-0000-0000-000000000000", // Gorra
+    productId: "p6000000-0000-0000-0000-000000000000", // Leather Jacket
+    categoryId: "c9000000-0000-0000-0000-000000000000", // Chaqueta
   },
   {
-    productId: "p7000000-0000-0000-0000-000000000000", // Leather Jacket
-    categoryId: "c9000000-0000-0000-0000-000000000000", // Chaqueta
+    productId: "p7000000-0000-0000-0000-000000000000", // Supreme
+    categoryId: "c8000000-0000-0000-0000-000000000000", // Gorra
   },
 ];

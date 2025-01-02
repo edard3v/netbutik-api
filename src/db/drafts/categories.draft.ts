@@ -11,7 +11,7 @@ export const CATEGORIES = [
   },
   {
     id: "c3000000-0000-0000-0000-000000000000",
-    name: "Media",
+    name: "Medias",
     img: "https://images.pexels.com/photos/1057005/pexels-photo-1057005.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&dpr=1",
   },
   {
