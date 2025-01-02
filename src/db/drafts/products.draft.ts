@@ -79,4 +79,16 @@ export const PRODUCTS = [
     isActive: true,
     description: "Camiseta sencilla y versátil, perfecta para el uso diario.",
   },
+  {
+    id: "p8000000-0000-0000-0000-000000000000",
+    name: "Short",
+    stock: 25,
+    buyingPrice: "15000",
+    sellingPrice: "30000",
+    img: "https://images.pexels.com/photos/5693888/pexels-photo-5693888.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&dpr=1",
+    video: "https://www.youtube.com/watch?v=A8CDVkV5pso",
+    isActive: true,
+    description:
+      "Short cómodo y ligero, ideal para actividades deportivas o días calurosos.",
+  },
 ];

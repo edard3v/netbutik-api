@@ -6,8 +6,8 @@ import * as schemas from "./schemas";
 import * as relations from "./relations";
 
 export const CONFIG_DB = {
-  // url: "file:./src/db/netbutik.db",
-  url: process.env.TURSO_CONNECTION_URL!,
+  url: "file:./src/db/netbutik.db",
+  // url: process.env.TURSO_CONNECTION_URL!,
   authToken: process.env.TURSO_AUTH_TOKEN!,
 };
 

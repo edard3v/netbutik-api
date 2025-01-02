@@ -36,8 +36,8 @@ export const getProductsService = async (params: GetProducts = {}) => {
       description: products.description,
       categories: sql<string>`
       CASE
-      WHEN ${categories.id} IS NULL THEN '[]'
-      ELSE JSON_GROUP_ARRAY(JSON_OBJECT('id', ${categories.id}, 'name', ${categories.name}))
+        WHEN ${categories.id} IS NULL THEN '[]'
+        ELSE JSON_GROUP_ARRAY(JSON_OBJECT('id', ${categories.id}, 'name', ${categories.name}))
       END`,
     })
     .from(products)
