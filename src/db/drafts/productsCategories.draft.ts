@@ -31,4 +31,8 @@ export const PRODUCTS_CATEGORIES = [
     productId: "p7000000-0000-0000-0000-000000000000", // Supreme
     categoryId: "c8000000-0000-0000-0000-000000000000", // Gorra
   },
+  {
+    productId: "p8000000-0000-0000-0000-000000000000", // Short
+    categoryId: "c2000000-0000-0000-0000-000000000000", // Pantalón
+  },
 ];
